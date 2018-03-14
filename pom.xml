@@ -67,6 +67,10 @@
             <id>KindakBaseLib</id>
             <url>https://github.com/kindak1/Kindaklib.git</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -83,10 +87,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>se.kindak</groupId>
-            <artifactId>kindaklib</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.github.kindak1</groupId>
+            <artifactId>Kindaklib</artifactId>
+            <version>876f0ed</version>
         </dependency>
     </dependencies>
 </project>
