@@ -1,0 +1,6 @@
+name: DarkGameMain
+version: ${project.version}
+main: se.kindak.darkgame.DarkGameMain
+authors: [Kindak]
+description: A plugin made by Kindak
+website: spigotmc.org/members/kindak.239995/
