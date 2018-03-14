@@ -91,5 +91,10 @@
             <artifactId>Kindaklib</artifactId>
             <version>876f0ed</version>
         </dependency>
+        <dependency>
+            <groupId>io.lumine.xikage</groupId>
+            <artifactId>mythicmobs</artifactId>
+            <version>12.2</version>
+        </dependency>
     </dependencies>
 </project>

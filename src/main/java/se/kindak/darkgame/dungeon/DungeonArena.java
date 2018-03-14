@@ -182,4 +182,8 @@ public class DungeonArena {
     public void setGates(Set<Gate> gates) {
         this.gates = gates;
     }
+
+    public Gate getGate(int id) {
+        return (Gate) this.gates.stream().filter(gate -> gate.getId() == id).toArray()[0];
+    }
 }
