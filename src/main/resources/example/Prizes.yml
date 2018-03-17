@@ -1,0 +1,9 @@
+0:
+  Messages:
+  - "Message1"
+  - "Message2"
+  - "Message3"
+  SendAtStart: true
+  Armorstand:
+    Spawn: false
+    Location: world,1,1,1
