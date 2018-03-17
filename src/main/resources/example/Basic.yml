@@ -1,0 +1,6 @@
+Name: Dungeon1
+Category: cave
+Max_Players: 5
+Min_Players: 2
+Spawn_Point: world,1,1,2
+Death_Point: world,1,2,1

@@ -1,0 +1,12 @@
+0:
+  Type:
+  Amount:
+  Location:
+  Spawn_At_Start: true
+  Trigger:
+    Gates:
+    - "id"
+    Mobs:
+    - "id"
+    Messages:
+    - "id"

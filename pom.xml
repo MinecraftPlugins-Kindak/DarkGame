@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.github.kindak1</groupId>
             <artifactId>Kindaklib</artifactId>
-            <version>876f0ed</version>
+            <version>7f6f1fff5d</version>
         </dependency>
         <dependency>
             <groupId>io.lumine.xikage</groupId>

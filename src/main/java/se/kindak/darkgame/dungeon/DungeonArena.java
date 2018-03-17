@@ -22,16 +22,18 @@ public class DungeonArena {
     private final String name;
     private final String category;
     //Players
-    private final int maxPlayers;
+    private final int MAX_PLAYERS;
+    private final int MIN_PLAYERS;
+    private HashSet<PlayerData> players;
     //Locations
     private final Location spawnPoint;
     private final Location deathPoint;
-    private HashSet<PlayerData> players;
+
     //State
     private GameState state;
     //Essentials
     private PrizePool prizePool;
-    private Set<MobPack> mobPack;
+    private Set<MobPack> mobPacks;
     private Set<Gate> gates;
     //File managment
     private File folder;
@@ -43,7 +45,9 @@ public class DungeonArena {
         loadConfigs();
         this.name = this.getBasicC().getString("Name");
         this.category = this.getBasicC().getString("Category");
-        this.maxPlayers = this.getBasicC().getInt("Max_Players");
+
+        this.MAX_PLAYERS = this.getBasicC().getInt("Max_Players");
+        this.MIN_PLAYERS = this.getBasicC().getInt("Min_Players");
 
         this.spawnPoint = LocationFormater.format(this.getBasicC().getString("Spawn_Point"));
         this.deathPoint = LocationFormater.format(this.getBasicC().getString("Death_Point"));
@@ -131,8 +135,8 @@ public class DungeonArena {
         return category;
     }
 
-    public int getMaxPlayers() {
-        return maxPlayers;
+    public int getMAX_PLAYERS() {
+        return MAX_PLAYERS;
     }
 
     public HashSet<PlayerData> getPlayers() {
@@ -167,12 +171,12 @@ public class DungeonArena {
         this.prizePool = prizePool;
     }
 
-    public Set<MobPack> getMobPack() {
-        return mobPack;
+    public Set<MobPack> getMobPacks() {
+        return mobPacks;
     }
 
-    public void setMobPack(Set<MobPack> mobPack) {
-        this.mobPack = mobPack;
+    public void setMobPacks(Set<MobPack> mobPacks) {
+        this.mobPacks = mobPacks;
     }
 
     public Set<Gate> getGates() {
@@ -185,5 +189,15 @@ public class DungeonArena {
 
     public Gate getGate(int id) {
         return (Gate) this.gates.stream().filter(gate -> gate.getId() == id).toArray()[0];
+    }
+
+    public MobPack getMobPack(int id) {
+        for (MobPack mobPack : mobPacks) {
+            if (mobPack.getId() == id) {
+                return mobPack;
+            }
+        }
+
+        return null;
     }
 }

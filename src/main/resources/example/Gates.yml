@@ -1,0 +1,11 @@
+0:
+  Locks: 5
+  Point_One: world,1,1,1
+  Point_Two: world,5,5,5
+  Trigger:
+    Gates:
+    - "id"
+    Mobs:
+    - "id"
+    Messages:
+    - "id"
