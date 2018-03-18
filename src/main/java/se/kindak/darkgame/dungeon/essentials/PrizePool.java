@@ -22,6 +22,7 @@ public class PrizePool {
     private void loadPrizes() {
         if (config.getKeys(false).isEmpty())
             return;
+        this.prizes = new ArrayList<>();
 
         for (String key : config.getKeys(false)) {
             int chance = config.getInt(key);
@@ -35,7 +36,6 @@ public class PrizePool {
     public List<Prize> prizesWithChance(int chance) {
         return this.prizes.stream().filter(prize -> prize.getDropChance() >= chance).collect(Collectors.toList());
     }
-
 
     public ItemStack[] lootToSend() {
         List<ItemStack> selection = new ArrayList<>();

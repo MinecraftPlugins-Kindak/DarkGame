@@ -5,6 +5,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import se.kindak.darkgame.dungeon.essentials.Gate;
+import se.kindak.darkgame.dungeon.essentials.Message;
 import se.kindak.darkgame.dungeon.essentials.MobPack;
 import se.kindak.darkgame.dungeon.essentials.PrizePool;
 import se.kindak.darkgame.dungeon.util.GameState;
@@ -24,17 +25,17 @@ public class DungeonArena {
     //Players
     private final int MAX_PLAYERS;
     private final int MIN_PLAYERS;
-    private HashSet<PlayerData> players;
     //Locations
     private final Location spawnPoint;
     private final Location deathPoint;
-
+    private HashSet<PlayerData> players;
     //State
     private GameState state;
     //Essentials
     private PrizePool prizePool;
     private Set<MobPack> mobPacks;
     private Set<Gate> gates;
+    private Set<Gate> messages;
     //File managment
     private File folder;
     private FileConfiguration gateC, prizeC, mobC, basicC;
@@ -58,19 +59,32 @@ public class DungeonArena {
         this.state = GameState.FINDING_SIGN;
     }
 
-    private void loadPrizes() {
+    // Player Managment
 
+    public void broadcast(String message) {
+        for (PlayerData player : players)
+            player.msg(message);
+    }
+    // Dungeon Managment
+
+    // Start up
+    private void loadPrizes() {
+        this.prizePool = new PrizePool(prizeC);
     }
 
     private void loadGates() {
-
+        this.gates = new HashSet<>();
     }
 
     private void loadMobs() {
-
+        this.mobPacks = new HashSet<>();
     }
 
-    public void loadConfigs() {
+    private void loadMessages() {
+        this.messages = new HashSet<>();
+    }
+
+    private void loadConfigs() {
         this.gateC = new YamlConfiguration();
         this.prizeC = new YamlConfiguration();
         this.mobC = new YamlConfiguration();
@@ -86,6 +100,32 @@ public class DungeonArena {
         }
     }
 
+    // Returners
+    public Gate getGate(int id) {
+        try {
+            return (Gate) this.gates.stream().filter(gate -> gate.getId() == id).toArray()[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    public MobPack getMobPack(int id) {
+        try {
+            return (MobPack) this.mobPacks.stream().filter(mobPack -> mobPack.getId() == id).toArray()[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    public Message getMessage(int id) {
+        try {
+            return (Message) this.messages.stream().filter(message -> message.getId() == id).toArray()[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    // Getters & Setters
     public File getFolder() {
 
         return folder;
@@ -187,17 +227,15 @@ public class DungeonArena {
         this.gates = gates;
     }
 
-    public Gate getGate(int id) {
-        return (Gate) this.gates.stream().filter(gate -> gate.getId() == id).toArray()[0];
+    public int getMIN_PLAYERS() {
+        return MIN_PLAYERS;
     }
 
-    public MobPack getMobPack(int id) {
-        for (MobPack mobPack : mobPacks) {
-            if (mobPack.getId() == id) {
-                return mobPack;
-            }
-        }
+    public Set<Gate> getMessages() {
+        return messages;
+    }
 
-        return null;
+    public void setMessages(Set<Gate> messages) {
+        this.messages = messages;
     }
 }
