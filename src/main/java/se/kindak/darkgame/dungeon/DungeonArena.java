@@ -10,6 +10,7 @@ import se.kindak.darkgame.dungeon.essentials.MobPack;
 import se.kindak.darkgame.dungeon.essentials.PrizePool;
 import se.kindak.darkgame.dungeon.util.GameState;
 import se.kindak.darkgame.playerdata.PlayerData;
+import se.kindak.darkgame.playerdata.util.Party;
 import se.kindak.kindaklib.location.LocationFormater;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class DungeonArena {
     private PrizePool prizePool;
     private Set<MobPack> mobPacks;
     private Set<Gate> gates;
-    private Set<Gate> messages;
+    private Set<Message> messages;
     //File managment
     private File folder;
     private FileConfiguration gateC, prizeC, mobC, basicC;
@@ -56,18 +57,11 @@ public class DungeonArena {
         this.loadMobs();
         this.loadGates();
         this.loadPrizes();
+        this.loadMessages();
         this.state = GameState.FINDING_SIGN;
     }
 
-    // Player Managment
-
-    public void broadcast(String message) {
-        for (PlayerData player : players)
-            player.msg(message);
-    }
-    // Dungeon Managment
-
-    // Start up
+    // Load up
     private void loadPrizes() {
         this.prizePool = new PrizePool(prizeC);
     }
@@ -99,6 +93,28 @@ public class DungeonArena {
             e.printStackTrace();
         }
     }
+
+    // Player Managment
+    public boolean addParty(Party party) {
+        if (players.containsAll(party.getPlayers()))
+            return false;
+        if (party.getPartySize() + players.size() > MAX_PLAYERS)
+            return false;
+
+
+        return players.addAll(party.getPlayers());
+    }
+
+    public boolean removePlayer(PlayerData playerData) {
+        return players.remove(playerData);
+    }
+
+    public void broadcast(String message) {
+        for (PlayerData player : players)
+            player.msg(message);
+    }
+    // Dungeon Managment
+
 
     // Returners
     public Gate getGate(int id) {
@@ -231,11 +247,11 @@ public class DungeonArena {
         return MIN_PLAYERS;
     }
 
-    public Set<Gate> getMessages() {
+    public Set<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(Set<Gate> messages) {
+    public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
 }

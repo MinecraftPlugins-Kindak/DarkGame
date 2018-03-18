@@ -13,14 +13,15 @@ public class Trigger {
     private Set<Gate> gates;
     private Set<MobPack> mobPacks;
     private Set<Message> messages;
+    private DungeonArena arena;
 
     public Trigger(FileConfiguration configuration, String path, DungeonArena arena) {
+        if (configuration.getConfigurationSection(path + ".Trigger") == null)
+            return;
         this.gates = new HashSet<>();
         this.mobPacks = new HashSet<>();
         this.messages = new HashSet<>();
-
-        if (configuration.getConfigurationSection(path + ".Trigger") == null)
-            return;
+        this.arena = arena;
 
         if (configuration.getConfigurationSection(path + ".Trigger.Gates") != null) {
             for (String gateId : configuration.getConfigurationSection(path + ".Trigger.Gates").getKeys(false)) {
@@ -41,7 +42,12 @@ public class Trigger {
         }
 
         if (configuration.getConfigurationSection(path + ".Trigger.Messages") != null) {
-
+            for (String mobId : configuration.getConfigurationSection(path + ".Trigger.Mobs").getKeys(false)) {
+                int id = Integer.parseInt(mobId);
+                if (arena.getMessage(id) != null) {
+                    messages.add(arena.getMessage(id));
+                }
+            }
         }
     }
 
