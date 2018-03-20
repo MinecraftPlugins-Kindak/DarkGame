@@ -2,8 +2,8 @@ package se.kindak.darkgame.dungeon.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import se.kindak.darkgame.dungeon.DungeonArena;
+import se.kindak.darkgame.dungeon.essentials.DungeonMessage;
 import se.kindak.darkgame.dungeon.essentials.Gate;
-import se.kindak.darkgame.dungeon.essentials.Message;
 import se.kindak.darkgame.dungeon.essentials.MobPack;
 
 import java.util.HashSet;
@@ -12,16 +12,19 @@ import java.util.Set;
 public class Trigger {
     private Set<Gate> gates;
     private Set<MobPack> mobPacks;
-    private Set<Message> messages;
+    public boolean hasRunned;
     private DungeonArena arena;
+    private Set<DungeonMessage> dungeonMessages;
 
     public Trigger(FileConfiguration configuration, String path, DungeonArena arena) {
         if (configuration.getConfigurationSection(path + ".Trigger") == null)
             return;
         this.gates = new HashSet<>();
         this.mobPacks = new HashSet<>();
-        this.messages = new HashSet<>();
+        this.dungeonMessages = new HashSet<>();
         this.arena = arena;
+        this.hasRunned = false;
+
 
         if (configuration.getConfigurationSection(path + ".Trigger.Gates") != null) {
             for (String gateId : configuration.getConfigurationSection(path + ".Trigger.Gates").getKeys(false)) {
@@ -45,7 +48,7 @@ public class Trigger {
             for (String mobId : configuration.getConfigurationSection(path + ".Trigger.Mobs").getKeys(false)) {
                 int id = Integer.parseInt(mobId);
                 if (arena.getMessage(id) != null) {
-                    messages.add(arena.getMessage(id));
+                    dungeonMessages.add(arena.getMessage(id));
                 }
             }
         }
@@ -53,5 +56,6 @@ public class Trigger {
 
     public void run() {
 
+        this.hasRunned = true;
     }
 }

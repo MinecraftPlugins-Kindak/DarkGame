@@ -1,11 +1,15 @@
 package se.kindak.darkgame.playerdata;
 
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import se.kindak.darkgame.dungeon.DungeonArena;
+import se.kindak.darkgame.util.message.MessageComponent;
 
 import java.util.UUID;
 
 public class PlayerData {
-    private UUID player;
+    private UUID playerUUID;
     private DungeonArena currentArena;
 
 
@@ -13,12 +17,26 @@ public class PlayerData {
 
     }
 
-    public UUID getPlayer() {
-        return player;
+    public void msg(MessageComponent message) {
+        switch (message.getType()) {
+            case ACTION_BAR:
+                getPlayer().spigot().sendMessage(new TextComponent());
+                break;
+            case TITLE:
+                break;
+            case CHAT:
+                break;
+            default:
+                return;
+        }
     }
 
-    public void setPlayer(UUID player) {
-        this.player = player;
+    public Player getPlayer() {
+        return Bukkit.getPlayer(playerUUID);
+    }
+
+    public void setPlayerUUID(UUID playerUUID) {
+        this.playerUUID = playerUUID;
     }
 
     public DungeonArena getCurrentArena() {

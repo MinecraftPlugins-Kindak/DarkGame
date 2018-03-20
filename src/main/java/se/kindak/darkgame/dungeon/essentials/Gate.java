@@ -15,6 +15,7 @@ public class Gate extends Trigger {
     private final int id;
     private final int MAX_LOCKS;
     public boolean isOpen;
+    public boolean isFirstGate;
     private int locks;
     private HashMap<Location, Material> materialMap;
     private Cuboid cuboid;
@@ -27,6 +28,7 @@ public class Gate extends Trigger {
         this.cuboid = new Cuboid(
                 LocationFormater.format(configuration.getString(id + ".Point_One")),
                 LocationFormater.format(configuration.getString(id + ".Point_Two")));
+        this.isFirstGate = configuration.getBoolean(id + ".Is_First_Gate");
         this.materialMap = new HashMap<>();
     }
 
@@ -48,6 +50,7 @@ public class Gate extends Trigger {
 
         this.locks = 0;
         this.isOpen = true;
+        this.run();
         return true;
     }
 
@@ -82,6 +85,15 @@ public class Gate extends Trigger {
     }
 
     //Getters & Setters
+
+
+    public boolean isFirstGate() {
+        return isFirstGate;
+    }
+
+    public void setFirstGate(boolean firstGate) {
+        isFirstGate = firstGate;
+    }
 
     public Cuboid getCuboid() {
         return cuboid;

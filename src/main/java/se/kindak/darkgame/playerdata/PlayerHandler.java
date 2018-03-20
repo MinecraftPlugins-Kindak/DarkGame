@@ -13,7 +13,7 @@ public class PlayerHandler {
     }
 
     public PlayerData getPlayerdata(Player player) {
-        return (PlayerData) players.stream().filter(p -> p.getPlayer() == player.getUniqueId()).toArray()[0];
+        return (PlayerData) players.stream().filter(p -> p.getPlayer() == player).toArray()[0];
     }
 
     public Set<PlayerData> getPlayers() {

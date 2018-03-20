@@ -4,10 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import se.kindak.darkgame.dungeon.essentials.Gate;
-import se.kindak.darkgame.dungeon.essentials.Message;
-import se.kindak.darkgame.dungeon.essentials.MobPack;
-import se.kindak.darkgame.dungeon.essentials.PrizePool;
+import se.kindak.darkgame.dungeon.essentials.*;
 import se.kindak.darkgame.dungeon.util.GameState;
 import se.kindak.darkgame.playerdata.PlayerData;
 import se.kindak.darkgame.playerdata.util.Party;
@@ -34,9 +31,11 @@ public class DungeonArena {
     private GameState state;
     //Essentials
     private PrizePool prizePool;
+    private Gate firstGate;
     private Set<MobPack> mobPacks;
     private Set<Gate> gates;
-    private Set<Message> messages;
+    private Set<DungeonMessage> dungeonMessages;
+    private Set<BlockTrigger> blockTriggers;
     //File managment
     private File folder;
     private FileConfiguration gateC, prizeC, mobC, basicC;
@@ -75,7 +74,7 @@ public class DungeonArena {
     }
 
     private void loadMessages() {
-        this.messages = new HashSet<>();
+        this.dungeonMessages = new HashSet<>();
     }
 
     private void loadConfigs() {
@@ -113,6 +112,7 @@ public class DungeonArena {
         for (PlayerData player : players)
             player.msg(message);
     }
+
     // Dungeon Managment
 
 
@@ -133,13 +133,22 @@ public class DungeonArena {
         }
     }
 
-    public Message getMessage(int id) {
+    public DungeonMessage getMessage(int id) {
         try {
-            return (Message) this.messages.stream().filter(message -> message.getId() == id).toArray()[0];
+            return (DungeonMessage) this.dungeonMessages.stream().filter(dungeonMessage -> dungeonMessage.getId() == id).toArray()[0];
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }
     }
+
+    public BlockTrigger getBlockTrigger(int id) {
+        try {
+            return (BlockTrigger) this.blockTriggers.stream().filter(blockTrigger -> blockTrigger.getId() == id).toArray()[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
 
     // Getters & Setters
     public File getFolder() {
@@ -247,11 +256,20 @@ public class DungeonArena {
         return MIN_PLAYERS;
     }
 
-    public Set<Message> getMessages() {
-        return messages;
+    public Set<DungeonMessage> getDungeonMessages() {
+        return dungeonMessages;
     }
 
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public void setDungeonMessages(Set<DungeonMessage> dungeonMessages) {
+        this.dungeonMessages = dungeonMessages;
     }
+
+    public Gate getFirstGate() {
+        return firstGate;
+    }
+
+    public void setFirstGate(Gate firstGate) {
+        this.firstGate = firstGate;
+    }
+
 }

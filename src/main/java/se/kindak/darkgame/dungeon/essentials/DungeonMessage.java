@@ -10,7 +10,7 @@ import se.kindak.kindaklib.location.LocationFormater;
 
 import java.util.List;
 
-public class Message extends BukkitRunnable {
+public class DungeonMessage extends BukkitRunnable {
     int delay = 0;
     private int id;
     private boolean sendAtStart;
@@ -21,10 +21,10 @@ public class Message extends BukkitRunnable {
     private DungeonArena arena;
     private int currentMessage = 0;
 
-    public Message(int id, FileConfiguration configuration, DungeonArena arena) {
+    public DungeonMessage(int id, FileConfiguration configuration, DungeonArena arena) {
         this.id = id;
         messages = configuration.getStringList(id + ".Messages");
-        this.sendAtStart = configuration.getBoolean(id + ".Send_At_Start");
+        this.sendAtStart = configuration.getBoolean(id + ".Run_At_Start");
         this.spawnHologram = configuration.getBoolean(id + "Hologram.spawn");
         this.sendMessage = configuration.getBoolean(id + ".Message_Players");
         if (spawnHologram)

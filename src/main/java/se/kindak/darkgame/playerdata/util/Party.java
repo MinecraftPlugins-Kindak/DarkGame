@@ -1,7 +1,7 @@
 package se.kindak.darkgame.playerdata.util;
 
 import se.kindak.darkgame.playerdata.PlayerData;
-import se.kindak.darkgame.util.settings;
+import se.kindak.darkgame.util.Settings;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class Party {
     }
 
     public boolean addPlayer(PlayerData player) {
-        if (players.size() == settings.instance().getMAX_PARTY_SIZE())
+        if (players.size() == Settings.instance().getMAX_PARTY_SIZE())
             return false;
 
         return players.add(player);

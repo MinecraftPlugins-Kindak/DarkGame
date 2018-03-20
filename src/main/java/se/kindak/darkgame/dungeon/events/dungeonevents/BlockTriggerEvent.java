@@ -1,20 +1,21 @@
 package se.kindak.darkgame.dungeon.events.dungeonevents;
 
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import se.kindak.darkgame.dungeon.essentials.BlockTrigger;
 import se.kindak.darkgame.dungeon.util.BlockAction;
 
 public class BlockTriggerEvent extends Event {
     public static HandlerList handlerList = new HandlerList();
     private BlockAction usedAction;
-    private Block block;
+    private BlockTrigger blockTrigger;
     private Player whoActivated;
 
-    public BlockTriggerEvent(BlockAction usedAction, Block block, Player whoActivated) {
+
+    public BlockTriggerEvent(BlockAction usedAction, BlockTrigger blockTrigger, Player whoActivated) {
         this.usedAction = usedAction;
-        this.block = block;
+        this.blockTrigger = blockTrigger;
         this.whoActivated = whoActivated;
     }
 
@@ -34,12 +35,12 @@ public class BlockTriggerEvent extends Event {
         this.usedAction = usedAction;
     }
 
-    public Block getBlock() {
-        return block;
+    public BlockTrigger getBlockTrigger() {
+        return blockTrigger;
     }
 
-    public void setBlock(Block block) {
-        this.block = block;
+    public void setBlockTrigger(BlockTrigger blockTrigger) {
+        this.blockTrigger = blockTrigger;
     }
 
     public Player getWhoActivated() {

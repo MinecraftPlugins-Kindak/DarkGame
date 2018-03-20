@@ -2,19 +2,19 @@ package se.kindak.darkgame.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class settings {
-    private static settings instance;
+public class Settings {
+    private static Settings instance;
     private final int MAX_RUNNING_DUNGEONS;
     private final int MAX_PARTY_SIZE;
 
-    public settings(FileConfiguration settings) {
+    public Settings(FileConfiguration settings) {
         instance = this;
         this.MAX_RUNNING_DUNGEONS = settings.getInt("Max_Running_Dungeons");
         this.MAX_PARTY_SIZE = settings.getInt("Max_Party_Size");
 
     }
 
-    public static settings instance() {
+    public static Settings instance() {
         return instance;
     }
 
