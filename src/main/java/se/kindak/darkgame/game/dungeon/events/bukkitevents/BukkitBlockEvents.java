@@ -1,4 +1,4 @@
-package se.kindak.darkgame.dungeon.events.bukkitevents;
+package se.kindak.darkgame.game.dungeon.events.bukkitevents;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import org.bukkit.Bukkit;
@@ -7,9 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-import se.kindak.darkgame.dungeon.essentials.BlockTrigger;
-import se.kindak.darkgame.dungeon.events.dungeonevents.BlockTriggerEvent;
-import se.kindak.darkgame.dungeon.util.BlockAction;
+import se.kindak.darkgame.game.dungeon.essentials.BlockTrigger;
+import se.kindak.darkgame.game.dungeon.events.dungeonevents.BlockTriggerEvent;
+import se.kindak.darkgame.game.dungeon.util.BlockAction;
 import se.kindak.darkgame.playerdata.PlayerHandler;
 
 public class BukkitBlockEvents implements Listener {

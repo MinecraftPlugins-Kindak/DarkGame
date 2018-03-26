@@ -1,11 +1,11 @@
-package se.kindak.darkgame.dungeon;
+package se.kindak.darkgame.game.dungeon;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import se.kindak.darkgame.dungeon.essentials.*;
-import se.kindak.darkgame.dungeon.util.GameState;
+import se.kindak.darkgame.game.dungeon.essentials.*;
+import se.kindak.darkgame.game.dungeon.util.GameState;
 import se.kindak.darkgame.playerdata.PlayerData;
 import se.kindak.darkgame.playerdata.util.Party;
 import se.kindak.kindaklib.location.LocationFormater;
@@ -114,7 +114,13 @@ public class DungeonArena {
     }
 
     // Dungeon Managment
+    public void startCountdown() {
 
+    }
+
+    public void start() {
+
+    }
 
     // Returners
     public Gate getGate(int id) {
@@ -151,6 +157,15 @@ public class DungeonArena {
 
 
     // Getters & Setters
+
+    public Set<BlockTrigger> getBlockTriggers() {
+        return blockTriggers;
+    }
+
+    public void setBlockTriggers(Set<BlockTrigger> blockTriggers) {
+        this.blockTriggers = blockTriggers;
+    }
+
     public File getFolder() {
 
         return folder;

@@ -1,4 +1,4 @@
-package se.kindak.darkgame.dungeon.util;
+package se.kindak.darkgame.game.dungeon.util;
 
 public enum GameState {
     LOADING, FINDING_SIGN, WAITING, RUNNING

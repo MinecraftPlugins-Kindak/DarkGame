@@ -1,13 +1,14 @@
-package se.kindak.darkgame.dungeon.essentials;
+package se.kindak.darkgame.game.dungeon.essentials;
 
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.metadata.FixedMetadataValue;
 import se.kindak.darkgame.DarkGameMain;
-import se.kindak.darkgame.dungeon.DungeonArena;
-import se.kindak.darkgame.dungeon.util.BlockAction;
-import se.kindak.darkgame.dungeon.util.Trigger;
+import se.kindak.darkgame.game.dungeon.DungeonArena;
+import se.kindak.darkgame.game.dungeon.util.BlockAction;
+import se.kindak.darkgame.game.dungeon.util.Trigger;
 
+//DONE
 public class BlockTrigger extends Trigger {
     private int id;
     private BlockAction action;
@@ -16,7 +17,7 @@ public class BlockTrigger extends Trigger {
     public BlockTrigger(FileConfiguration configuration, String path, DungeonArena arena, Block block) {
         super(configuration, path, arena);
         this.block = block;
-        this.block.setMetadata("BlockTrigger", new FixedMetadataValue(DarkGameMain.instance, this));
+        this.block.setMetadata("BlockTrigger", new FixedMetadataValue(DarkGameMain.getInstance(), this));
     }
 
     public Block getBlock() {

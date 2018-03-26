@@ -1,4 +1,4 @@
-package se.kindak.darkgame.dungeon.essentials;
+package se.kindak.darkgame.game.dungeon.essentials;
 
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import org.bukkit.Location;
@@ -6,8 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.metadata.FixedMetadataValue;
 import se.kindak.darkgame.DarkGameMain;
-import se.kindak.darkgame.dungeon.DungeonArena;
-import se.kindak.darkgame.dungeon.util.Trigger;
+import se.kindak.darkgame.game.dungeon.DungeonArena;
+import se.kindak.darkgame.game.dungeon.util.Trigger;
 import se.kindak.kindaklib.location.LocationFormater;
 
 import java.util.HashSet;
@@ -43,7 +43,7 @@ public class MobPack extends Trigger {
                     .spawnMob(type, spawnpoint)
                     .getEntity()
                     .getBukkitEntity()
-                    .setMetadata("Mob", new FixedMetadataValue(DarkGameMain.instance, this));
+                    .setMetadata("Mob", new FixedMetadataValue(DarkGameMain.getInstance(), this));
             i++;
         }
         this.hasSpawned = true;
@@ -58,6 +58,7 @@ public class MobPack extends Trigger {
                 entity.remove();
             }
         }
+        mobs.clear();
         this.hasSpawned = false;
         return true;
     }

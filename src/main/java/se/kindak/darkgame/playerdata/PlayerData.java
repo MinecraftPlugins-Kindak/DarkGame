@@ -3,7 +3,7 @@ package se.kindak.darkgame.playerdata;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import se.kindak.darkgame.dungeon.DungeonArena;
+import se.kindak.darkgame.game.dungeon.DungeonArena;
 import se.kindak.darkgame.util.message.MessageComponent;
 
 import java.util.UUID;

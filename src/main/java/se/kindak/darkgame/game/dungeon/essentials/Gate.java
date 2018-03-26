@@ -1,16 +1,17 @@
-package se.kindak.darkgame.dungeon.essentials;
+package se.kindak.darkgame.game.dungeon.essentials;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
-import se.kindak.darkgame.dungeon.DungeonArena;
-import se.kindak.darkgame.dungeon.util.Trigger;
+import se.kindak.darkgame.game.dungeon.DungeonArena;
+import se.kindak.darkgame.game.dungeon.util.Trigger;
 import se.kindak.kindaklib.location.Cuboid;
 import se.kindak.kindaklib.location.LocationFormater;
 
 import java.util.HashMap;
 
+// DOne
 public class Gate extends Trigger {
     private final int id;
     private final int MAX_LOCKS;
@@ -85,7 +86,6 @@ public class Gate extends Trigger {
     }
 
     //Getters & Setters
-
 
     public boolean isFirstGate() {
         return isFirstGate;

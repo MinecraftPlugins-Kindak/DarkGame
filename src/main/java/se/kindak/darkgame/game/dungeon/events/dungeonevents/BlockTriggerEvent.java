@@ -1,10 +1,10 @@
-package se.kindak.darkgame.dungeon.events.dungeonevents;
+package se.kindak.darkgame.game.dungeon.events.dungeonevents;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import se.kindak.darkgame.dungeon.essentials.BlockTrigger;
-import se.kindak.darkgame.dungeon.util.BlockAction;
+import se.kindak.darkgame.game.dungeon.essentials.BlockTrigger;
+import se.kindak.darkgame.game.dungeon.util.BlockAction;
 
 public class BlockTriggerEvent extends Event {
     public static HandlerList handlerList = new HandlerList();

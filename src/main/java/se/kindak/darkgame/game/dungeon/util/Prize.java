@@ -1,4 +1,4 @@
-package se.kindak.darkgame.dungeon.util;
+package se.kindak.darkgame.game.dungeon.util;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

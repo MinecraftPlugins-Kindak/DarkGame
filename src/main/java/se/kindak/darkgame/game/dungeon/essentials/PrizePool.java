@@ -1,12 +1,12 @@
-package se.kindak.darkgame.dungeon.essentials;
+package se.kindak.darkgame.game.dungeon.essentials;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-import se.kindak.darkgame.dungeon.util.Prize;
-import se.kindak.kindaklib.item.ItemBuilder;
+import se.kindak.darkgame.game.dungeon.util.Prize;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class PrizePool {
     private final int MAX_REWARDS;
@@ -24,39 +24,33 @@ public class PrizePool {
             return;
         this.prizes = new ArrayList<>();
 
-        for (String key : config.getKeys(false)) {
+/*        for (String key : config.getKeys(false)) {
+            //TODO - Need update
             int chance = config.getInt(key);
             ItemBuilder item = ItemBuilder.deSerilize(key);
             Prize prize = new Prize(item.build(), chance);
             prizes.add(prize);
-        }
+        }*/
     }
-
 
     public List<Prize> prizesWithChance(int chance) {
         return this.prizes.stream().filter(prize -> prize.getDropChance() >= chance).collect(Collectors.toList());
     }
 
     public ItemStack[] lootToSend() {
-        List<ItemStack> selection = new ArrayList<>();
-        Arrays.asList(gatherLoot()).forEach(prize -> selection.add(prize.build()));
-        Collections.shuffle(selection);
-
-        int amountOfRewards;
-        if (MAX_REWARDS > selection.size() - 1)
-            return (ItemStack[]) selection.toArray();
-        else
-            amountOfRewards = selection.size() - 1;
-        ItemStack[] prizes = new ItemStack[amountOfRewards];
-        for (int i = 0; i > amountOfRewards; i++) {
-            prizes[i] = selection.get(i);
+        int chance = rollChance();
+        List<Prize> selection = Arrays.asList(gatherLoot(chance));
+        selection.sort(Comparator.comparing(prize -> prize.getDropChance()));
+        int amount = prizes.size() > MAX_REWARDS ? MAX_REWARDS : prizes.size();
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < amount - 1; i++) {
+            items.add(selection.get(i).build());
         }
-
-        return prizes;
+        return (ItemStack[]) items.toArray();
     }
 
-    public Prize[] gatherLoot() {
-        return (Prize[]) prizesWithChance(rollChance()).toArray();
+    public Prize[] gatherLoot(int chance) {
+        return (Prize[]) prizesWithChance(chance).toArray();
     }
 
     public int rollChance() {

@@ -1,14 +1,16 @@
-package se.kindak.darkgame.dungeon.essentials;
+package se.kindak.darkgame.game.dungeon.essentials;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 import se.kindak.darkgame.DarkGameMain;
-import se.kindak.darkgame.dungeon.DungeonArena;
+import se.kindak.darkgame.game.dungeon.DungeonArena;
 import se.kindak.kindaklib.location.LocationFormater;
 
 import java.util.List;
+
+// Done
 
 public class DungeonMessage extends BukkitRunnable {
     int delay = 0;
@@ -28,7 +30,7 @@ public class DungeonMessage extends BukkitRunnable {
         this.spawnHologram = configuration.getBoolean(id + "Hologram.spawn");
         this.sendMessage = configuration.getBoolean(id + ".Message_Players");
         if (spawnHologram)
-            this.hologram = HologramsAPI.createHologram(DarkGameMain.instance, LocationFormater.format(configuration.getString(id + ".Hologram.location")));
+            this.hologram = HologramsAPI.createHologram(DarkGameMain.getInstance(), LocationFormater.format(configuration.getString(id + ".Hologram.location")));
         this.arena = arena;
     }
 
@@ -40,10 +42,11 @@ public class DungeonMessage extends BukkitRunnable {
         }
         String message = messages.get(currentMessage);
 
-        if (message.split(":")[0].equalsIgnoreCase("delay"))
-            delay = Integer.parseInt(message.split(":")[1]);
-
         if (delay == 0) {
+            if (message.split(":")[0].equalsIgnoreCase("delay")) {
+                delay = Integer.parseInt(message.split(":")[1]);
+                return;
+            }
             if (sendMessage)
                 arena.broadcast(this.messages.get(currentMessage));
             if (spawnHologram)
